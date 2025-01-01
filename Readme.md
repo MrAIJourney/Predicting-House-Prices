@@ -1,0 +1,1 @@
+In this project I’ll work on building a predictive model using a real-world dataset, such as predicting house prices, loan approvals, or customer churn.
