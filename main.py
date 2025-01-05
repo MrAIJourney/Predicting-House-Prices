@@ -6,6 +6,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
+import numpy as np
 
 # Load dataset
 california_housing_data = fetch_california_housing(as_frame=True)
@@ -49,4 +50,17 @@ lr_model_test_r2 = r2_score(y_test, y_lr_model_test_predict)
 # creata a data frame to save result of evaluating models
 models_eval_df = pd.DataFrame(['Linear Regression', lr_model_train_mean_squared, lr_model_train_r2, lr_model_test_mean_squared, lr_model_test_r2]).transpose()
 models_eval_df.columns =['Model','Training MSE','Training R2','Testing MSE', 'Testing R2']
-print(models_eval_df)
+# print(models_eval_df)
+
+# Visualizing predicted results
+plt.scatter(x=y_test, y= y_lr_model_test_predict, alpha=0.3, c="#424899")
+plt.xlabel = 'Actual Price'
+plt.ylabel = 'Predicted Price'
+plt.title = 'Actual vs Predicted House price'
+
+# add trend line in scatter plot
+z_trend_line = np.polyfit(y_test, y_lr_model_test_predict, 1)
+p_trend_line = np.poly1d(z_trend_line)
+plt.plot(y_test, p_trend_line(y_test), 'r--')
+
+plt.show()
